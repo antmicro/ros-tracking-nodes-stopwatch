@@ -1,0 +1,4 @@
+string first_topic
+string second_topic
+uint32 queue_size
+string description

@@ -13,13 +13,14 @@ class Stopwatch
 {
 public:
     Stopwatch();
-    void advertiseServices();
     unsigned createClock(std::string name);
     void startClock(unsigned id);
     void stopClock(unsigned id);
+    bool findClock(unsigned id);
     bool saveRecords(stopwatch::saveRecordsService::Request& req,
             stopwatch::saveRecordsService::Response& res);
 private:
+    void advertiseServices();
     std::vector<Clock> m_clocks;
     ros::ServiceServer save_records_service;
 };

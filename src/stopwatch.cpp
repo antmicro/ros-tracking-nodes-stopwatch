@@ -27,6 +27,7 @@ void Stopwatch::advertiseServices()
 unsigned Stopwatch::createClock(std::string name)
 {
     m_clocks.emplace_back(name);
+    ROS_INFO("Clock created; id %lu; name %s", m_clocks.size() - 1, name.c_str());
     return m_clocks.size() - 1;
 }
 
@@ -50,6 +51,11 @@ void Stopwatch::stopClock(unsigned id)
     m_clocks[id].stop();
 }
 
+bool Stopwatch::findClock(unsigned id)
+{
+    return (id < m_clocks.size());
+}
+
 bool Stopwatch::saveRecords(stopwatch::saveRecordsService::Request& req,
                             stopwatch::saveRecordsService::Response& res)
 {
@@ -71,10 +77,4 @@ bool Stopwatch::saveRecords(stopwatch::saveRecordsService::Request& req,
     }
     ROS_INFO("Records saved");
     return 1;
-}
-
-int main(int argc, char** argv)
-{
-    ros::init(argc, argv, "stopwatch");
-    ROS_INFO("Initialized");
 }

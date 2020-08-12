@@ -11,6 +11,7 @@ find_package(catkin REQUIRED COMPONENTS
     std_msgs
     message_generation
     utils_node
+    topic_tools
 )
 
 execute_process(
@@ -25,6 +26,10 @@ add_definitions(-DCOMMIT="${GIT_COMMIT_HASH}")
 add_service_files(
     FILES
     saveRecordsService.srv
+    ticService.srv
+    tocService.srv
+    newClockService.srv
+    registerPairService.srv
 )
 
 generate_messages(DEPENDENCIES std_msgs sensor_msgs)
@@ -36,8 +41,6 @@ catkin_package(
 
 find_package(OpenCV REQUIRED COMPONENTS core imgproc highgui)
 
-include_directories(${catkin_INCLUDE_DIRS})
-
 include_directories(
     src
     ${catkin_INCLUDE_DIRS}
@@ -47,6 +50,9 @@ include_directories(
 
 add_library(${PROJECT_NAME}_lib
     src/clock.cpp
+    src/stopwatch.cpp
+    src/tictoc.cpp
+    src/topicsniffer.cpp
 )
 
 target_link_libraries(${PROJECT_NAME}_lib
@@ -55,7 +61,7 @@ target_link_libraries(${PROJECT_NAME}_lib
 )
 
 add_executable(${PROJECT_NAME}
-    src/stopwatch.cpp
+    src/main.cpp
 )
 
 add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}_gencpp)

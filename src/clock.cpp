@@ -29,8 +29,7 @@ void Clock::stop()
     if (m_begin < m_end)
     {
         m_end = ros::Time::now();
-        m_records.back() = m_end;
-        ROS_WARN("clock %s already started", m_description.c_str());
+        ROS_WARN("clock %s already stopped", m_description.c_str());
     }
     else
     {
