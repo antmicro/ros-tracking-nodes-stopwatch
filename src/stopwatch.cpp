@@ -7,11 +7,6 @@
 #include <cassert>
 #include <string>
 
-// we'll need some class to keep data about the pairs
-// we need to keep clocks somewhere probably some map id->clock (can't use [])
-// we need to keep subs and pass info to interested pair keepers so probably some
-// topic->set of pair keepers
-
 Stopwatch::Stopwatch()
 {
     advertiseServices();
@@ -31,24 +26,26 @@ unsigned Stopwatch::createClock(std::string name)
     return m_clocks.size() - 1;
 }
 
-void Stopwatch::startClock(unsigned id)
+bool Stopwatch::startClock(unsigned id)
 {
     if (id >= m_clocks.size())
     {
         ROS_ERROR("clock id %d out of range\n", id);
-        return;
+        return false;
     }
     m_clocks[id].start();
+    return true;
 }
 
-void Stopwatch::stopClock(unsigned id)
+bool Stopwatch::stopClock(unsigned id)
 {
     if (id >= m_clocks.size())
     {
         ROS_ERROR("clock id %d out of range\n", id);
-        return;
+        return false;
     }
     m_clocks[id].stop();
+    return true;
 }
 
 bool Stopwatch::findClock(unsigned id)
@@ -64,7 +61,7 @@ bool Stopwatch::saveRecords(stopwatch::saveRecordsService::Request& req,
     if (!out)
     {
         ROS_ERROR("%s", ("Could not open file " + filename + " for writing.").c_str());
-        return 0;
+        return false;
     }
     ROS_INFO("Saving records to file");
     out << std::setprecision(15) << std::fixed;
@@ -76,5 +73,5 @@ bool Stopwatch::saveRecords(stopwatch::saveRecordsService::Request& req,
         out << '\n';
     }
     ROS_INFO("Records saved");
-    return 1;
+    return true;
 }

@@ -7,20 +7,24 @@
 #include <string>
 #include <vector>
 
+/**
+ * Class measuring one time interval - pair of two points in time
+ * It uses ros::Time underneath
+ */
 class Clock
 {
 public:
-    Clock() = delete;
-    Clock(std::string description);
-    void start();
-    void stop();
-    ros::Duration getDiff();
-    std::string getDescription();
-    std::vector<ros::Time> getRecords();
+    Clock() = delete; ///< Clocks need to have description
+    Clock(std::string description); ///< Create clock with description
+    void start(); ///< start time measurment (save current time as the first time point)
+    void stop(); ///< stop time measurment (save current tiem as the second time point)
+    ros::Duration getDiff(); ///< when clock is stopped, get last measurement
+    std::string getDescription(); ///< return provided description
+    std::vector<ros::Time> getRecords(); ///< return vector containing 
 private:
-    std::string m_description;
-    ros::Time m_begin, m_end;
-    std::vector<ros::Time> m_records;
+    std::string m_description; ///< tells what the clock measures
+    ros::Time m_begin, m_end; ///< timepoints representing the interval
+    std::vector<ros::Time> m_records; ///< when the clock was toggled
 };
 
 #endif

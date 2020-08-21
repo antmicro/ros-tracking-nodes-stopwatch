@@ -40,7 +40,7 @@ void Clock::stop()
 
 ros::Duration Clock::getDiff()
 {
-    if (m_begin < m_end)
+    if (m_begin > m_end)
         throw std::runtime_error("Clock " + m_description + " in invalid state.");
     return m_end - m_begin;
 }

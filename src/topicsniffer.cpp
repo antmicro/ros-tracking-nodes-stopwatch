@@ -37,7 +37,6 @@ TopicSniffer::Pair::Pair(const std::string& first_topic, const std::string& seco
 
 void TopicSniffer::Pair::notify(const std::string& topic)
 {
-    ROS_INFO("%s", topic.c_str());
     assert(topic == m_first_topic || topic == m_second_topic);
     if (topic == m_first_topic)
         m_nQueuedMessages = (m_first_topic_queue_size ? std::min(m_nQueuedMessages + 1,
@@ -76,12 +75,17 @@ bool TopicSniffer::registerPair(stopwatch::registerPairService::Request& req,
                     std::forward_as_tuple(elem), std::forward_as_tuple(*this, elem));
         m_topic_to_pair_id[elem].push_back(id);
     }
-    return 1;
+    return true;
 }
 
-void TopicSniffer::handleMessage(const std::string& topic)
+bool TopicSniffer::handleMessage(const std::string& topic)
 {
-    if (m_topic_to_pair_id.find(topic) == m_topic_to_pair_id.end()) return;
+    if (m_topic_to_pair_id.find(topic) == m_topic_to_pair_id.end())
+    {
+        ROS_ERROR("[TopicSniffer] Can't find topic %s", topic.c_str());
+        return false;
+    }
     for (auto& pair_id : m_topic_to_pair_id[topic])
         m_pairs[pair_id].notify(topic);
+    return true;
 }

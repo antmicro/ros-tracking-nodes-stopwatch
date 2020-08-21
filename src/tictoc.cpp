@@ -13,8 +13,7 @@ bool TicToc::tic(stopwatch::ticService::Request& req,
         ROS_ERROR("No clock with id %lu", req.id);
         return 0;
     }
-    m_stopwatch.startClock(req.id);
-    return 1;
+    return m_stopwatch.startClock(req.id);
 }
 
 bool TicToc::toc(stopwatch::tocService::Request& req,
@@ -25,8 +24,7 @@ bool TicToc::toc(stopwatch::tocService::Request& req,
         ROS_ERROR("No clock with id %lu", req.id);
         return 0;
     }
-    m_stopwatch.stopClock(req.id);
-    return 1;
+    return m_stopwatch.stopClock(req.id);
 }
 
 bool TicToc::newClock(stopwatch::newClockService::Request& req,
