@@ -14,14 +14,31 @@
 class TicToc
 {
 public:
-    TicToc() = delete; ///< Requires stopwatch
+    /**
+     * Requires stopwatch
+     */
+    TicToc() = delete; 
+
     TicToc(Stopwatch& stopwatch);
+
+    /**
+     * tic service callback
+     */
     bool tic(stopwatch::ticService::Request& req,
-                stopwatch::ticService::Response& res); ///< tic service callback
+            stopwatch::ticService::Response& res); 
+
+    /**
+     * toc service callback
+     */
     bool toc(stopwatch::tocService::Request& req,
-                stopwatch::tocService::Response& res); ///< toc service callback
+            stopwatch::tocService::Response& res); 
+
+    /**
+     * newClock service callback
+     */
     bool newClock(stopwatch::newClockService::Request& req,
-                stopwatch::newClockService::Response& res); ///< newClock service callback
+                stopwatch::newClockService::Response& res); 
+
 private:
     void advertiseServices(); ///< advertise services
     ros::ServiceServer tic_server, toc_server, new_clock_server; ///< ros service servers

@@ -31,7 +31,7 @@ bool TicToc::newClock(stopwatch::newClockService::Request& req,
             stopwatch::newClockService::Response& res)
 {
     res.id = m_stopwatch.createClock(req.description);
-    return 1;
+    return true;
 }
 
 void TicToc::advertiseServices()

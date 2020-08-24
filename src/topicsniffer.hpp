@@ -93,11 +93,11 @@ private:
         void notify(const std::string& topic);
     private:
         std::string m_first_topic, m_second_topic; ///< respective topic names
-        unsigned m_first_topic_queue_size; ///< queue size of the first topic
-        unsigned m_clock_id; ///< id of used clock from Stopwatch
+        unsigned m_first_topic_queue_size{}; ///< queue size of the first topic
+        unsigned m_clock_id{}; ///< id of used clock from Stopwatch
         Stopwatch& m_stopwatch; ///< stopwatch reference
-        unsigned m_nQueuedMessages; ///< counts how many messages are queued up
-        bool m_working; ///< is measured algorithm currently working
+        unsigned m_nQueuedMessages{}; ///< counts how many messages are queued up
+        bool m_working{}; ///< is measured algorithm currently working
     };
     
     void advertiseServices(); ///< advertises ROS services

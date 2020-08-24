@@ -15,7 +15,8 @@ void Clock::start()
     {
         m_begin = ros::Time::now();
         m_records.back() = m_begin;
-        ROS_WARN("clock %s already started", m_description.c_str());
+        ROS_WARN("clock %s already started, reinitializing with %f", m_description.c_str(),
+                m_begin.toSec());
     }
     else
     {
