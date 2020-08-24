@@ -1,7 +1,5 @@
 #include "topicsniffer.hpp"
 
-#include <cassert>
-
 TopicSniffer::TopicSniffer(Stopwatch& stopwatch) : m_stopwatch(stopwatch)
 {
     advertiseServices();
@@ -37,7 +35,13 @@ TopicSniffer::Pair::Pair(const std::string& first_topic, const std::string& seco
 
 void TopicSniffer::Pair::notify(const std::string& topic)
 {
-    assert(topic == m_first_topic || topic == m_second_topic);
+    if (!topic == m_first_topic && !topic == m_second_topic)
+    {
+        ROS_ERROR("[TopicSniffer] Critical error: %s does not belong to pair (%s, %s). "
+                "Shutting down.", topic.c_str(), m_first_topic.c_str(),
+                m_second_topic.c_str());
+        ros::shutdown();
+    }
     if (topic == m_first_topic)
         m_nQueuedMessages = (m_first_topic_queue_size ? std::min(m_nQueuedMessages + 1,
                             m_first_topic_queue_size) : m_nQueuedMessages + 1);
