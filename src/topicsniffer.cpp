@@ -35,7 +35,7 @@ TopicSniffer::Pair::Pair(const std::string& first_topic, const std::string& seco
 
 void TopicSniffer::Pair::notify(const std::string& topic)
 {
-    if (!topic == m_first_topic && !topic == m_second_topic)
+    if (!(topic == m_first_topic) && !(topic == m_second_topic))
     {
         ROS_ERROR("[TopicSniffer] Critical error: %s does not belong to pair (%s, %s). "
                 "Shutting down.", topic.c_str(), m_first_topic.c_str(),
