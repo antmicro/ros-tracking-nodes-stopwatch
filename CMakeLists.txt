@@ -54,6 +54,12 @@ add_library(${PROJECT_NAME}_lib
     src/topicsniffer.cpp
 )
 
+target_include_directories(${PROJECT_NAME}_lib PUBLIC
+    src
+    ${catkin_INCLUDE_DIRS}
+    ${OpenCV_LIBS}
+)
+
 target_link_libraries(${PROJECT_NAME}_lib
     ${OpenCV_LIBS}
     ${catkin_LIBRARIES}
@@ -61,6 +67,12 @@ target_link_libraries(${PROJECT_NAME}_lib
 
 add_executable(${PROJECT_NAME}
     src/main.cpp
+)
+
+target_include_directories(${PROJECT_NAME} PUBLIC
+    src
+    ${catkin_INCLUDE_DIRS}
+    ${OpenCV_LIBS}
 )
 
 add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}_gencpp)
