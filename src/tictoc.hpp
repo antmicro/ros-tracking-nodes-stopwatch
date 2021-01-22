@@ -15,10 +15,13 @@ class TicToc
 {
 public:
     /**
-     * Requires stopwatch
+     * Only constructor with an argument is allowed
      */
     TicToc() = delete; 
 
+    /**
+     * The only constructor, first argument is stopwatch. Note that the stopwatch has to outlive the constructed TicToc.
+     */
     TicToc(Stopwatch& stopwatch);
 
     /**

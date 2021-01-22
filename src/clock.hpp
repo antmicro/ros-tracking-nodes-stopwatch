@@ -15,7 +15,7 @@ class Clock
 {
 public:
     /**
-     * Clocks need to have description
+     * Only constructor with string argument is allowed
      */
     Clock() = delete; 
 
