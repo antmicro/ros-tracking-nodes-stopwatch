@@ -1,6 +1,8 @@
 Stopwatch
 =========
 
+Copyright (c) 2020-2021 `Antmicro <https://www.antmicro.com>`_
+
 *To see how this repository can be used, check* `ros-tracking-nodes-policy-examples repository <https://github.com/antmicro/ros-tracking-nodes-policy-examples>`_.
 
 Provides a simple interface for measuring algorithms runtime duration.
