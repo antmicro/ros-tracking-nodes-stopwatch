@@ -3,34 +3,34 @@ Stopwatch
 
 Copyright (c) 2020-2021 `Antmicro <https://www.antmicro.com>`_
 
-*To see how this repository can be used, check* `ros-tracking-nodes-policy-examples repository <https://github.com/antmicro/ros-tracking-nodes-policy-examples>`_.
+*To see how this repository can be used, see* the `ros-tracking-nodes-policy-examples repository <https://github.com/antmicro/ros-tracking-nodes-policy-examples>`_.
 
-Provides a simple interface for measuring algorithms runtime duration.
+Stopwatch provides a simple interface for measuring the algorithms runtime duration.
 
 Usage
 -----
 
-Stopwatch node includes two interfaces and a service which saves gathered measurements.
+The Stopwatch node includes two interfaces and a service which saves the gathered measurements.
 
 Tic toc
 ~~~~~~~
 
-First interface consists of three services: ``createClock``, ``tic`` and ``toc``.
+The first interface consists of three services: ``createClock``, ``tic`` and ``toc``.
 
 - ``createClock`` takes one parameter: ``description`` and returns ``id`` of created clock
 - ``tic`` takes ``id`` as parameter denoting clock id and starts the clock
-- ``toc`` also takes ``id`` as its only argument and stops corresponding clock
+- ``toc`` also takes ``id`` as its only argument and stops the corresponding clock
 
 Automatic tracking
 ~~~~~~~~~~~~~~~~~~
 
-Call ``stopwatch/registerPair`` with two topic names, queue size and a description.
-It is advised to register topics on node creation, to easily meet the requirements.
+Call ``stopwatch/registerPair`` with two topic names, queue size and description.
+It is advised to register topics on node creation to easily meet the requirements.
 
 Saving results
 ~~~~~~~~~~~~~~
 
-``stopwatch/saveRecords`` has to be called in order to save records gathered from all clocks.
+``stopwatch/saveRecords`` has to be called in order to save the records gathered from all clocks.
 It takes one argument - path to output ``.csv`` file.
 
 Examples
@@ -68,7 +68,7 @@ Examples
    tic_srv.request.id = clock_id;
    tic_client.call(tic_srv); 
 
-   // interesting event happens here
+   // an interesting event happens here
 
    stopwatch::tocService toc_srv;
    toc_srv.request.id = clock_id;
