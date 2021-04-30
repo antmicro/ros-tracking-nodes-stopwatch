@@ -3,8 +3,7 @@ Stopwatch
 
 Copyright (c) 2020-2021 `Antmicro <https://www.antmicro.com>`_
 
-*To see how this repository can be used, see* the `ros-tracking-nodes-policy-examples repository <https://github.com/antmicro/ros-tracking-nodes-policy-examples>`_.
-
+To see how this repository can be used, see the `ros-tracking-nodes-policy-examples repository <https://github.com/antmicro/ros-tracking-nodes-policy-examples>`_.
 Stopwatch provides a simple interface for measuring the algorithms runtime duration.
 
 Usage
